@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBuilder", "AppBuilder\Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategoryComponentTests", "CategoryComponentTests\CategoryComponentTests.csproj", "{EE35FE3D-EA70-41C2-9507-B8E394EF293F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAnalysisComponent", "SemanticAnalysisComponent\SemanticAnalysisComponent.csproj", "{856E5119-5C48-4E8F-93FB-C4FAD8BBC29D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAnalysisComponentTests", "SemanticAnalysisComponentTests\SemanticAnalysisComponentTests.csproj", "{9DE25F80-B612-43E8-A4EB-AE3A32AA0551}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{EE35FE3D-EA70-41C2-9507-B8E394EF293F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE35FE3D-EA70-41C2-9507-B8E394EF293F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE35FE3D-EA70-41C2-9507-B8E394EF293F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856E5119-5C48-4E8F-93FB-C4FAD8BBC29D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856E5119-5C48-4E8F-93FB-C4FAD8BBC29D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856E5119-5C48-4E8F-93FB-C4FAD8BBC29D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856E5119-5C48-4E8F-93FB-C4FAD8BBC29D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE25F80-B612-43E8-A4EB-AE3A32AA0551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE25F80-B612-43E8-A4EB-AE3A32AA0551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE25F80-B612-43E8-A4EB-AE3A32AA0551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE25F80-B612-43E8-A4EB-AE3A32AA0551}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
