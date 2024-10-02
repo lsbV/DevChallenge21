@@ -3,25 +3,26 @@ using AutoMapper;
 using Core;
 using Database.DbModels;
 
-namespace CategoryComponent;
+namespace TopicComponent;
 
 public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Category, DbCategory>()
+        CreateMap<Topic, DbTopic>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.Value))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Value))
             .ForMember(dest => dest.Points, opt => opt.Ignore())
             .AfterMap((c, dbC) => dbC.Points = c.Points.Select(p => p.Value).ToHashSet());
 
-        CreateMap<DbCategory, Category>()
+        CreateMap<DbTopic, Topic>()
             .ForMember(dest => dest.Points, opt => opt.Ignore())
-            .ConstructUsing(dbCategory =>
-                new Category(
-                    new CategoryId(dbCategory.Id),
-                    new Title(dbCategory.Title),
-                    dbCategory.Points.Select(p => new Point(p)).ToImmutableHashSet()
+            .ConstructUsing(dbTopic =>
+                new Topic(
+                    new TopicId(dbTopic.Id),
+                    new Title(dbTopic.Title),
+                    dbTopic.Points.Select(p => new Point(p)).ToImmutableHashSet(),
+                    new CallId(dbTopic.CallId)
                 ));
 
     }

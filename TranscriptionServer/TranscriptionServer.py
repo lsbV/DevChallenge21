@@ -26,7 +26,11 @@ def transcribe():
     try:
         # Transcribe the audio
         transcript = transcribe_audio(temp_path)
+        print(f"Transcription: {transcript}")
         return jsonify({"transcription": transcript})
+    except Exception as e:
+        print(f"Error during transcription: {e}")
+        return jsonify({"error": "Transcription failed"}), 500
     finally:
         # Clean up the temporary file
         os.remove(temp_path)

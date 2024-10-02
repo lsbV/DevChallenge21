@@ -1,6 +1,8 @@
-﻿namespace SemanticAnalysisComponent;
+﻿using Core;
+
+namespace SemanticAnalysisComponent;
 
 public interface ISemanticAnalysisService
 {
-    Task<AnalysisReport> AnalyzeAsync(string text);
+    Task<Call> AnalyzeAsync(Transcription transcription, CallId callId);
 }

@@ -18,3 +18,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("c8d86247-cca9-48e8-8aef-54e32a1cf37f")]
 [assembly: InternalsVisibleTo("AppBuilder")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("CallComponentTests")]

@@ -11,7 +11,7 @@ public class CallRepository(AppDbContext context, IMapper mapper) : ICallReposit
     public async Task<Call> GetCallByIdAsync(CallId id)
     {
         var call = await context.Calls
-            .Include(c => c.Categories)
+            .Include(c => c.Topics)
             .FirstOrDefaultAsync(c => c.Id == id.Value);
         if (call == null) throw new EntityNotExistException(nameof(DbCall), id);
         context.Entry(call).State = EntityState.Detached;
@@ -23,7 +23,7 @@ public class CallRepository(AppDbContext context, IMapper mapper) : ICallReposit
         var dbCall = mapper.Map<DbCall>(call);
         await context.Calls.AddAsync(dbCall);
         await context.SaveChangesAsync();
-        context.Entry(call).State = EntityState.Detached;
+        context.Entry(dbCall).State = EntityState.Detached;
         return new CallId(dbCall.Id);
 
     }

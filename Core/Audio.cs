@@ -1,3 +1,5 @@
-﻿namespace Core;
+﻿using System.Collections.Immutable;
 
-public record Audio(byte[] Data);
+namespace Core;
+
+public record Audio(ImmutableArray<byte> Data);

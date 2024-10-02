@@ -1,3 +1,3 @@
 ﻿namespace Core;
 
-public record Transcription(string Value);
+public record Transcription(string Text);

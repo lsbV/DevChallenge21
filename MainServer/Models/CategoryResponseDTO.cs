@@ -1,6 +1,6 @@
-﻿namespace MainServer.Controllers;
+﻿namespace MainServer.Models;
 
-public class CategoryResponseDTO
+public class TopicResponseDTO
 {
     public required int Id { get; set; }
     public required string Title { get; set; }

@@ -9,13 +9,19 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<AppExceptionFilter>();
 });
+builder.Services.AddHttpClient();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCategoryComponent();
+
+builder.Services.AddTopicComponent();
+builder.Services.AddCallComponent();
+builder.Services.AddSemanticAnalysisComponent();
+
 builder.Services.AddAppDatabase(builder.Configuration.GetConnectionString("Database") ??
                                 throw new InvalidConfigurationException("ConnectionString:Database"));
 builder.Services.AddAppAutoMapper();
 builder.Services.AddAutoMapper(typeof(MainServer.Infrastructure.AutoMapperProfiles.AutoMapperProfile).Assembly);
+
 
 
 var app = builder.Build();

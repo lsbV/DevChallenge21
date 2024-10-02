@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MainServer.Controllers;
+namespace MainServer.Models;
 
-public class UpdateCategoryRequestDTO
+public class UpdateTopicRequestDTO
 {
     [Required]
     public required string Title { get; set; }

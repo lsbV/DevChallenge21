@@ -10,7 +10,7 @@ public class EntityNotExistException : Exception
     {
     }
 
-    public EntityNotExistException(string entityTypeName, object identifier) : base($"Entity {entityTypeName} with Value {identifier} not found")
+    public EntityNotExistException(string entityTypeName, object identifier) : base($"Entity {entityTypeName} with Name {identifier} not found")
     {
     }
 }

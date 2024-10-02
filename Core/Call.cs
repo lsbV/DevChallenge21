@@ -4,8 +4,26 @@ namespace Core;
 
 public record Call(
     CallId Id,
-    Name Name,
-    Location Location,
     EmotionalTone Tone,
     Transcription Transcription,
-    ImmutableHashSet<Category> Categories);
+    ImmutableHashSet<Person> People,
+    ImmutableHashSet<Location> Locations,
+    ImmutableList<Topic> Topics,
+    Status Status)
+{
+    public static Call Empty => new(
+        CallId.Default,
+        EmotionalTone.Neutral,
+        new Transcription(string.Empty),
+        ImmutableHashSet<Person>.Empty,
+        ImmutableHashSet<Location>.Empty,
+        ImmutableList<Topic>.Empty,
+        Status.Processing
+    );
+}
+
+public enum Status
+{
+    Processing,
+    Completed
+}

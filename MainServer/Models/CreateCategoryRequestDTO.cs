@@ -1,6 +1,6 @@
-﻿namespace MainServer.Controllers;
+﻿namespace MainServer.Models;
 
-public class CreateCategoryRequestDTO
+public class CreateTopicRequestDTO
 {
     public required string Title { get; set; }
     public required string[] Points { get; set; }

@@ -19,17 +19,21 @@ public class PromptProvider
                 The emotional tone must be one of the following values: Neutral, Positive, Negative, Angry.
                 
                Categorization:
-                Classify the conversation into one or more relevant categories based on the topic (e.g., "Visa and Passport Services," "Diplomatic Inquiries," "Travel Advisories," etc.).
+                Classify the conversation into one or more relevant topics (e.g., "Visa and Passport Services," "Diplomatic Inquiries," "Travel Advisories," etc.).
 
+               Transcription:
+                Provide the transcription of the conversation. Correct any errors in the transcription if necessary.
+               
                The output should be a JSON object without ANY addition text with the following structure:
                {
                  "people": ["John Doe", "Jane Doe"],
                  "locations": ["New York", "Los Angeles"],
                  "tone": "Neutral",
-                 "categories": [
+                 "topics": [
                  {"title":"Conversation topic 1", "points":["Point 1", "Point 2"]},
                  {"title":"Conversation topic 2", "points":["Point 1", "Point 2"]},
-                 ]
+                 ],
+                 "transcription": "The transcription of the conversation."
                }
                -------------------- 
                """;

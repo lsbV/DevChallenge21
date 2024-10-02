@@ -1,4 +1,5 @@
 ﻿using Core.Exceptions;
+using MainServer.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -20,6 +21,10 @@ public class AppExceptionFilter : IExceptionFilter
                 break;
             case UnprocessableEntityException unprocessableEntityException:
                 context.Result = new UnprocessableEntityObjectResult(new { Error = unprocessableEntityException.Message });
+                context.ExceptionHandled = true;
+                break;
+            case ProcessingNotFinishedException processingNotFinishedException:
+                context.Result = new StatusCodeResult(202);
                 context.ExceptionHandled = true;
                 break;
             default:
