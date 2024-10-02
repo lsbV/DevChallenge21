@@ -26,8 +26,10 @@ public class PromptProvider
                  "people": ["John Doe", "Jane Doe"],
                  "locations": ["New York", "Los Angeles"],
                  "tone": "Neutral",
-                 "categories": ["Visa and Passport Services"]
-                 
+                 "categories": [
+                 {"title":"Conversation topic 1", "points":["Point 1", "Point 2"]},
+                 {"title":"Conversation topic 2", "points":["Point 1", "Point 2"]},
+                 ]
                }
                -------------------- 
                """;

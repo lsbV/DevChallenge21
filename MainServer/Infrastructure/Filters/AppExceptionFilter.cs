@@ -18,6 +18,10 @@ public class AppExceptionFilter : IExceptionFilter
                 context.Result = new ConflictObjectResult(new { Error = entityAlreadyExistsException.Message });
                 context.ExceptionHandled = true;
                 break;
+            case UnprocessableEntityException unprocessableEntityException:
+                context.Result = new UnprocessableEntityObjectResult(new { Error = unprocessableEntityException.Message });
+                context.ExceptionHandled = true;
+                break;
             default:
                 context.Result = new StatusCodeResult(500);
 #if DEBUG

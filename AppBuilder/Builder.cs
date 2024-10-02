@@ -1,7 +1,9 @@
-﻿using CategoryComponent;
+﻿using CallComponent;
+using CategoryComponent;
 using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SemanticAnalysisComponent;
 
 namespace AppBuilder;
 
@@ -33,4 +35,18 @@ public static class Builder
         return services;
     }
 
+    public static IServiceCollection AddCallComponent(this IServiceCollection services)
+    {
+        services.AddScoped<ICallRepository, CallRepository>();
+        services.AddScoped<ICallService, CallService>();
+        services.AddScoped<ITranscriptionService, ProxyTranscriptionService>();
+        return services;
+    }
+
+    public static IServiceCollection AddSemanticAnalysisComponent(this IServiceCollection services)
+    {
+        services.AddSingleton<ISemanticAnalysisService, OllamaSemanticAnalysisService>();
+        services.AddSingleton<PromptProvider>();
+        return services;
+    }
 }

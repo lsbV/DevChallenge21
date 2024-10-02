@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticAnalysisComponentTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallComponent", "CallComponent\CallComponent.csproj", "{CD744C0A-DB94-4EE2-BC82-20AB01666682}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TranscriptionServer", "TranscriptionServer\TranscriptionServer.pyproj", "{A0013FF7-DA75-4A01-AE15-93D93CB8B618}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,8 @@ Global
 		{CD744C0A-DB94-4EE2-BC82-20AB01666682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD744C0A-DB94-4EE2-BC82-20AB01666682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD744C0A-DB94-4EE2-BC82-20AB01666682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0013FF7-DA75-4A01-AE15-93D93CB8B618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0013FF7-DA75-4A01-AE15-93D93CB8B618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\SemanticAnalysisComponent\SemanticAnalysisComponent.csproj" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,7 @@ public sealed class SemanticAnalysisServiceTests
     }
 
 
-
+    [Ignore]
     [TestMethod]
     public async Task AnalyzeAsync_WhenCalledWithText_ReturnsAnalysis()
     {

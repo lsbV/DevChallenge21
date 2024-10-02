@@ -7,5 +7,5 @@ public record Call(
     Name Name,
     Location Location,
     EmotionalTone Tone,
-    Transaction Transaction,
-    ImmutableHashSet<Title> Categories);
+    Transcription Transcription,
+    ImmutableHashSet<Category> Categories);

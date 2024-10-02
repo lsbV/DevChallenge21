@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using CategoryComponent;
 using Core;
@@ -65,25 +64,4 @@ public class CategoryController(ICategoryService service, IMapper mapper) : Cont
 
 
 
-}
-
-public class UpdateCategoryRequestDTO
-{
-    [Required]
-    public required string Title { get; set; }
-    public required string[] Points { get; set; }
-}
-
-public class CreateCategoryRequestDTO
-{
-    public required string Title { get; set; }
-    public required string[] Points { get; set; }
-
-}
-
-public class CategoryResponseDTO
-{
-    public required int Id { get; set; }
-    public required string Title { get; set; }
-    public required string[] Points { get; set; }
 }

@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CallComponent\CallComponent.csproj" />
     <ProjectReference Include="..\CategoryComponent\CategoryComponent.csproj" />
+    <ProjectReference Include="..\SemanticAnalysisComponent\SemanticAnalysisComponent.csproj" />
   </ItemGroup>
 
 </Project>
