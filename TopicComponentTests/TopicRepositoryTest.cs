@@ -35,25 +35,26 @@ public class TopicRepositoryTest
     [TestMethod]
     public async Task CreateTopicAsyncTestShouldPass()
     {
-        var Topic = new Topic(new TopicId(0), new Title("Title"), ImmutableHashSet.Create(new Point("Point1"), new Point("Point1")));
+        var topic = new Topic(new TopicId(0), new Title("Title"), ImmutableHashSet.Create(new Point("Point1"), new Point("Point1")), CallId.Default);
 
 
-        var actual = await _repository.CreateTopicAsync(Topic);
+        var actual = await _repository.CreateTopicAsync(topic);
 
 
 
         Assert.IsTrue(actual.Id != TopicId.Default);
-        Assert.AreEqual(Topic.Title, actual.Title);
-        Assert.IsTrue(Topic.Points.SetEquals(actual.Points));
+        Assert.AreEqual(topic.Title, actual.Title);
+        Assert.IsTrue(topic.Points.SetEquals(actual.Points));
     }
 
     [TestMethod]
     public async Task DeleteTopicAsyncTestShouldPass()
     {
-        var TopicId = new TopicId(1);
+        var topicId = new TopicId(1);
+        await _repository.CreateTopicAsync(new Topic(topicId, new Title("Title"), ImmutableHashSet.Create(new Point("Point1"), new Point("Point1")), CallId.Default));
 
-        var expected = await _repository.GetTopicAsync(TopicId);
-        var actual = await _repository.DeleteTopicAsync(TopicId);
+        var expected = await _repository.GetTopicAsync(topicId);
+        var actual = await _repository.DeleteTopicAsync(topicId);
 
         Assert.AreEqual(expected.Id, actual.Id);
         Assert.AreEqual(expected.Title, actual.Title);
@@ -63,10 +64,12 @@ public class TopicRepositoryTest
     [TestMethod]
     public async Task UpdateTopicTestShouldPass()
     {
-        var TopicId = new TopicId(1);
+        var topicId = new TopicId(1);
 
-        var Topic = await _repository.GetTopicAsync(TopicId);
-        var newTopic = Topic with { Title = new Title("New Title") };
+        await _repository.CreateTopicAsync(new Topic(topicId, new Title("Title"), ImmutableHashSet.Create(new Point("Point1"), new Point("Point1")), CallId.Default));
+
+        var topic = await _repository.GetTopicAsync(topicId);
+        var newTopic = topic with { Title = new Title("New Title") };
 
         var actual = await _repository.UpdateTopicAsync(newTopic);
 
@@ -74,10 +77,10 @@ public class TopicRepositoryTest
     }
 
     [TestMethod]
-    public async Task GetCategoriesAsyncTestShouldPass()
+    public async Task GetTopicsAsyncTestShouldPass()
     {
-        var categories = await _context.Topics.ToListAsync();
-        var expected = categories.Select(_mapper.Map<Topic>);
+        var topics = await _context.Topics.ToListAsync();
+        var expected = topics.Select(_mapper.Map<Topic>);
 
 
         var actual = await _repository.GetCategoriesAsync();

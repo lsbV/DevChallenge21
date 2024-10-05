@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Core;
 using SemanticAnalysisComponent;
-using Topic = SemanticAnalysisComponent.Topic;
 
 namespace SemanticAnalysisComponentTests;
 
@@ -28,7 +27,7 @@ public class AutoMapperProfileTest
             Locations = ["location"],
             Topics =
             [
-                new Topic()
+                new TopicDto()
                 {
                     Title = "title",
                     Points = ["point"]
@@ -44,9 +43,9 @@ public class AutoMapperProfileTest
         Assert.AreEqual(1, call.Locations.Count);
         Assert.AreEqual("location", call.Locations.First().Address);
         Assert.AreEqual(1, call.Topics.Count);
-        Assert.AreEqual("title", call.Topics.First().Title.Value);
-        Assert.AreEqual(1, call.Topics.First().Points.Count);
-        Assert.AreEqual("point", call.Topics.First().Points.First().Value);
+        Assert.AreEqual("title", call.Topics[0].Title.Value);
+        Assert.AreEqual(1, call.Topics[0].Points.Count);
+        Assert.AreEqual("point", call.Topics[0].Points.First().Value);
         Assert.AreEqual(Status.Processing, call.Status);
 
 

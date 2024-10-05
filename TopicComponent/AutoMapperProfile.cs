@@ -13,6 +13,7 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.Value))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Value))
             .ForMember(dest => dest.Points, opt => opt.Ignore())
+            .ForMember(dest => dest.CallId, opt => opt.MapFrom(src => src.CallId.Value))
             .AfterMap((c, dbC) => dbC.Points = c.Points.Select(p => p.Value).ToHashSet());
 
         CreateMap<DbTopic, Topic>()

@@ -2,7 +2,7 @@
 
 namespace MainServer.Models;
 
-public class UpdateTopicRequestDTO
+public class UpdateTopicRequestDto
 {
     [Required]
     public required string Title { get; set; }

@@ -3,6 +3,7 @@ using TopicComponent;
 using Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using OllamaSharp;
 using SemanticAnalysisComponent;
 
@@ -21,7 +22,7 @@ public static class Builder
     {
         services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseInMemoryDatabase(connectionString);
+            options.UseSqlServer(connectionString);
         });
         using var scope = services.BuildServiceProvider().CreateScope();
         using var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -47,14 +48,23 @@ public static class Builder
         return services;
     }
 
-    public static IServiceCollection AddSemanticAnalysisComponent(this IServiceCollection services)
+    public static async Task<IServiceCollection> AddSemanticAnalysisComponentAsync(this IServiceCollection services)
     {
         services.AddSingleton<ISemanticAnalysisService, OllamaSemanticAnalysisService>();
-        services.AddSingleton(new OllamaApiClient(new Uri("http://localhost:11434"))
+        const string modelName = "llama3.1:latest";
+        var ollama = new OllamaApiClient(new Uri("http://ollama:11434"))
         {
-            SelectedModel = "llama3.1:latest",
-
-        });
+            SelectedModel = modelName,
+        };
+        var logger = services.BuildServiceProvider().GetRequiredService<ILogger<OllamaSemanticAnalysisService>>();
+        var lastStep = 0;
+        await foreach (var progress in ollama.PullModel(modelName))
+        {
+            if (progress is null || (int)progress.Percent % 10 != 0 || (int)progress.Percent == lastStep) continue;
+            lastStep = (int)progress.Percent;
+            logger.LogInformation("Downloading model {Percent}%", progress.Percent);
+        }
+        services.AddSingleton(ollama);
         services.AddSingleton<PromptProvider>();
         return services;
     }

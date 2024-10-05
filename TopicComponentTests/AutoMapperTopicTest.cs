@@ -20,13 +20,13 @@ public class AutoMapperTopicTest
     [TestMethod]
     public void AutoMapperShouldMapTopicIntoDbTopic()
     {
-        var Topic = new Topic(new TopicId(1), new Title("Title"), ImmutableHashSet.Create(new Point("Point1"), new Point("Point1")));
+        var topic = new Topic(new TopicId(1), new Title("Title"), ImmutableHashSet.Create(new Point("Point1"), new Point("Point1")), CallId.Default);
 
-        var dbTopic = _mapper.Map<DbTopic>(Topic);
+        var dbTopic = _mapper.Map<DbTopic>(topic);
 
-        Assert.AreEqual(Topic.Id.Value, dbTopic.Id);
-        Assert.AreEqual(Topic.Title.Value, dbTopic.Title);
-        Assert.IsTrue(dbTopic.Points.SetEquals(Topic.Points.Select(p => p.Value)));
+        Assert.AreEqual(topic.Id.Value, dbTopic.Id);
+        Assert.AreEqual(topic.Title.Value, dbTopic.Title);
+        Assert.IsTrue(dbTopic.Points.SetEquals(topic.Points.Select(p => p.Value)));
 
     }
 
@@ -35,10 +35,10 @@ public class AutoMapperTopicTest
     {
         var dbTopic = new DbTopic { Id = 1, Title = "Title", Points = ["Tag1", "Tag2"], CallId = 1 };
 
-        var Topic = _mapper.Map<Topic>(dbTopic);
+        var topic = _mapper.Map<Topic>(dbTopic);
 
-        Assert.AreEqual(dbTopic.Id, Topic.Id.Value);
-        Assert.AreEqual(dbTopic.Title, Topic.Title.Value);
+        Assert.AreEqual(dbTopic.Id, topic.Id.Value);
+        Assert.AreEqual(dbTopic.Title, topic.Title.Value);
 
     }
 }

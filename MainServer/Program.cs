@@ -15,14 +15,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTopicComponent();
 builder.Services.AddCallComponent();
-builder.Services.AddSemanticAnalysisComponent();
+await builder.Services.AddSemanticAnalysisComponentAsync();
 
 builder.Services.AddAppDatabase(builder.Configuration.GetConnectionString("Database") ??
                                 throw new InvalidConfigurationException("ConnectionString:Database"));
 builder.Services.AddAppAutoMapper();
 builder.Services.AddAutoMapper(typeof(MainServer.Infrastructure.AutoMapperProfiles.AutoMapperProfile).Assembly);
 
-
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -37,5 +37,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseHealthChecks(
+    "/health");
 
 await app.RunAsync();

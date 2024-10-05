@@ -22,7 +22,8 @@ public class PromptProvider
                 Classify the conversation into one or more relevant topics (e.g., "Visa and Passport Services," "Diplomatic Inquiries," "Travel Advisories," etc.).
 
                Transcription:
-                Provide the transcription of the conversation. Correct any errors in the transcription if necessary.
+                Provide the transcription of the conversation. Correct any errors in the transcription if necessary. Convert text into scripted dialogue if it is possible.
+                For example, convert "Hello. Hi. How are you?" to "A: Hello. B: Hi. A: How are you?" with each speaker's name before their dialogue and a colon after their name and punctuation at the end of each sentence.
                
                The output should be a JSON object without ANY addition text with the following structure:
                {

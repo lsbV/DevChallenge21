@@ -1,0 +1,73 @@
+services:
+  main-server:
+    build:
+      context: .
+      dockerfile: MainServer/Dockerfile
+      target: final
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_URLS=http://*:8080
+      - ConnectionStrings__Database=Server=sql-server,1433;Database=mydatabase;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+    depends_on:
+      - ollama
+      - transcription-server
+      - sql-server
+
+  ollama:
+    image: ollama/ollama
+    container_name: ollama_service
+    restart: unless-stopped
+    command: ["serve"]
+    expose:
+      - "11434"
+    volumes:
+        - ollama_models:/app/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    runtime: nvidia
+    environment:
+      - OLLAMA_HOST=http://0.0.0.0:11434
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+  transcription-server:
+    build:
+      context: ./TranscriptionServer
+    ports:
+      - "5000:5000"
+    volumes:
+      - audio_files:/app/audio_files
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 8G
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  audio_files: 
+  ollama_models:  
+  sql_data:  

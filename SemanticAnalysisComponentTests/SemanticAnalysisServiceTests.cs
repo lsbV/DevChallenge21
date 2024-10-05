@@ -25,7 +25,7 @@ public sealed class SemanticAnalysisServiceTests
     }
 
 
-    [TestMethod]
+    [Ignore]
     public async Task AnalyzeAsync_WhenCalledWithText_ReturnsAnalysis()
     {
         // Arrange

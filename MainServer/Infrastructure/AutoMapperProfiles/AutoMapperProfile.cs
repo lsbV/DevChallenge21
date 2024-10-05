@@ -10,7 +10,7 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<CreateTopicRequestDTO, Topic>()
+        CreateMap<CreateTopicRequestDto, Topic>()
             .ForMember(dest => dest.Points, opt => opt.Ignore())
             .ConstructUsing(request => new Topic(
                 new TopicId(0),
@@ -19,7 +19,7 @@ public class AutoMapperProfile : Profile
                 CallId.Default
             ));
 
-        CreateMap<Topic, TopicResponseDTO>()
+        CreateMap<Topic, TopicResponseDto>()
             .ForMember(dest => dest.Points, opt => opt.MapFrom(src => src.Points.Select(p => p.Value).ToArray()))
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.Value))
             .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title.Value));

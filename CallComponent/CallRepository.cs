@@ -32,7 +32,7 @@ public class CallRepository(AppDbContext context, IMapper mapper) : ICallReposit
         var dbCall = mapper.Map<DbCall>(call);
         context.Calls.Update(dbCall);
         await context.SaveChangesAsync();
-        context.Entry(call).State = EntityState.Detached;
-        return new CallId(dbCall.Id);
+        context.Entry(dbCall).State = EntityState.Detached;
+        return call.Id;
     }
 }

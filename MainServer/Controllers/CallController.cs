@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 using CallComponent;
 using Core;
 using MainServer.Models;
@@ -18,11 +19,26 @@ public class CallController(ICallService service, IMapper mapper, HttpClient htt
         return Ok(new CreateCallResponseDto() { Id = callId.Value });
     }
 
-    [HttpPost("/FromLocalFile")]
+    [HttpPost("FromLocalFile")]
     public async Task<IActionResult> FromLocalFile(CreateCallFromLocalFileRequestDto request)
     {
         var audio = await System.IO.File.ReadAllBytesAsync(request.LocalPath);
         var callId = await service.ProcessCallAsync(new Audio([.. audio]));
+        return Ok(new CreateCallResponseDto() { Id = callId.Value });
+    }
+
+    [HttpPost("AudioInBody")]
+    public async Task<IActionResult> AudioInBody([FromForm] IFormFile audioFile)
+    {
+        if (audioFile.Length == 0)
+        {
+            return BadRequest("Audio file is not provided or is empty.");
+        }
+
+        using var memoryStream = new MemoryStream();
+        await audioFile.CopyToAsync(memoryStream);
+        var audioBytes = memoryStream.ToArray();
+        var callId = await service.ProcessCallAsync(new Audio([.. audioBytes]));
         return Ok(new CreateCallResponseDto() { Id = callId.Value });
     }
 
@@ -32,9 +48,7 @@ public class CallController(ICallService service, IMapper mapper, HttpClient htt
         var callId = new CallId(id);
         var call = await service.GetCallByIdAsync(callId);
         var callDto = mapper.Map<CallResponseDto>(call);
-        return Ok(callDto);
+        return Ok(call);
     }
 
 }
-
-// exception processing not finished yet

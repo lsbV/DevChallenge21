@@ -7,7 +7,7 @@ namespace CallComponent;
 
 internal class ProxyTranscriptionService(HttpClient httpClient) : ITranscriptionService
 {
-    private readonly Uri _transcriptionServerUri = new("http://127.0.0.1:5000/transcribe");
+    private readonly Uri _transcriptionServerUri = new("http://transcription-server:5000/transcribe");
     public async Task<Transcription> TranscribeAsync(Audio audio)
     {
         var content = new MultipartFormDataContent();

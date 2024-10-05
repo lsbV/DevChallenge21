@@ -22,8 +22,8 @@ public sealed class TopicServiceTest
         new Topic(
             id,
             new Title("Title"),
-            ImmutableHashSet.Create(new Point("Point1"), new Point("Point1"))
-        );
+            ImmutableHashSet.Create(new Point("Point1"), new Point("Point1")),
+            CallId.Default);
 
     [TestMethod]
     public async Task CreateTopicAsyncTestShouldPassCorrectly()

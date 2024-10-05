@@ -17,50 +17,23 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<DbTopic>()
             .Property(nameof(DbTopic.Points))
             .HasConversion(splitStringConverter);
+
         modelBuilder.Entity<DbCall>()
             .HasMany(c => c.Topics)
             .WithOne()
             .HasForeignKey(c => c.CallId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<DbCall>()
+            .Property(nameof(DbCall.Status))
+            .HasConversion<string>();
+
         modelBuilder.Entity<DbCall>()
             .Property(nameof(DbCall.People))
             .HasConversion(splitStringConverter);
+
         modelBuilder.Entity<DbCall>()
             .Property(nameof(DbCall.Locations))
             .HasConversion(splitStringConverter);
-
-
-        //modelBuilder.Entity<DbTopic>().HasData(
-        //    new DbTopic
-        //    {
-        //        Id = 1,
-        //        Title = "Visa and Passport Services",
-        //        Points = ["Visa Application", "Passport Application", "Visa Extension"]
-        //    },
-        //    new DbTopic
-        //    {
-        //        Id = 2,
-        //        Title = "Diplomatic Inquiries",
-        //        Points = ["Diplomatic Passport", "Diplomatic Visa", "Diplomatic Note"]
-        //    },
-        //    new DbTopic
-        //    {
-        //        Id = 3,
-        //        Title = "Travel Advisories",
-        //        Points = ["Travel Warning", "Travel Alert", "Travel Advisory"]
-        //    },
-        //    new DbTopic
-        //    {
-        //        Id = 4,
-        //        Title = "Consular Assistance",
-        //        Points = ["Consular Report of Birth Abroad", "Notarial Services", "Emergency Assistance"]
-        //    },
-        //    new DbTopic
-        //    {
-        //        Id = 5,
-        //        Title = "Trade and Economic Cooperation",
-        //        Points = ["Trade Agreement", "Trade Mission", "Trade Show"]
-        //    }
-        //);
     }
 }

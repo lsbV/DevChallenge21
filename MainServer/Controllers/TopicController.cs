@@ -18,7 +18,7 @@ public class TopicController(ITopicService service, IMapper mapper) : Controller
     public async Task<IActionResult> Get()
     {
         var categories = await service.GetCategoriesAsync();
-        var topicDtos = categories.Select(mapper.Map<TopicResponseDTO>);
+        var topicDtos = categories.Select(mapper.Map<TopicResponseDto>);
         return Ok(topicDtos);
     }
 
@@ -27,12 +27,12 @@ public class TopicController(ITopicService service, IMapper mapper) : Controller
     {
         var topicId = new TopicId(id);
         var topic = await service.GetTopicAsync(topicId);
-        var topicDto = mapper.Map<TopicResponseDTO>(topic);
+        var topicDto = mapper.Map<TopicResponseDto>(topic);
         return Ok(topicDto);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(CreateTopicRequestDTO requestDto)
+    public async Task<IActionResult> Post(CreateTopicRequestDto requestDto)
     {
         var topic = mapper.Map<Topic>(requestDto);
         var createdTopic = await service.CreateTopicAsync(topic);
@@ -40,7 +40,7 @@ public class TopicController(ITopicService service, IMapper mapper) : Controller
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(UpdateTopicRequestDTO requestDto, int id)
+    public async Task<IActionResult> Put(UpdateTopicRequestDto requestDto, int id)
     {
         var topicId = new TopicId(id);
         var topicFromService = await service.GetTopicAsync(topicId);
@@ -52,7 +52,7 @@ public class TopicController(ITopicService service, IMapper mapper) : Controller
         );
 
         var updatedTopic = await service.UpdateTopicAsync(topic);
-        var updatedTopicDto = mapper.Map<TopicResponseDTO>(updatedTopic);
+        var updatedTopicDto = mapper.Map<TopicResponseDto>(updatedTopic);
         return Ok(updatedTopicDto);
     }
 
@@ -60,7 +60,7 @@ public class TopicController(ITopicService service, IMapper mapper) : Controller
     public async Task<IActionResult> Delete(int id)
     {
         var deletedTopic = await service.DeleteTopicAsync(new TopicId(id));
-        var deletedTopicDto = mapper.Map<TopicResponseDTO>(deletedTopic);
+        var deletedTopicDto = mapper.Map<TopicResponseDto>(deletedTopic);
         return Ok(deletedTopicDto);
     }
 
