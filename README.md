@@ -73,4 +73,4 @@ You can use tools like Postman or cURL to interact with the API. There is AudioE
 - **Optimize Performance**: Fine-tune the transcription and analysis processes for better performance.
 - **Expand Functionality**: Add more detailed analysis and categorization features.
 
-[REQUIREMENTS](https://github.com/lsbV/DevChallenge21/Requirements.txt)
+[REQUIREMENTS](https://github.com/lsbV/DevChallenge21/blob/master/Requirements.txt)
